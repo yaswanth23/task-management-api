@@ -36,3 +36,19 @@ module.exports.deleteTask = async (whereObj, session) => {
     throw error;
   }
 };
+
+module.exports.findTasks = async (whereObj, session) => {
+  try {
+    let attributes = {
+      taskId: 1,
+      userId: 1,
+      title: 1,
+      description: 1,
+      status: 1,
+      createdAt: 1,
+    };
+    return await TasksSchema.find(whereObj, attributes).session(session);
+  } catch (error) {
+    throw error;
+  }
+};

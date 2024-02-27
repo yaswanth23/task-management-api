@@ -79,6 +79,7 @@ class TaskBao extends Base {
 
       let updateObj = {
         status: data.status,
+        updatedAt: new Date().toISOString(),
       };
 
       await TaskDao.updateTask(whereObj, updateObj, session);
@@ -126,6 +127,35 @@ class TaskBao extends Base {
       await session.commitTransaction();
       session.endSession();
       return true;
+    } catch (error) {
+      logger.error(error);
+      await session.abortTransaction();
+      session.endSession();
+      throw error;
+    }
+  }
+
+  async getTasksList(userId) {
+    const session = await mongoose.startSession();
+    try {
+      logger.info("task bao: getTasksList", userId);
+      session.startTransaction();
+
+      let whereObj = {
+        userId: userId,
+      };
+
+      const user = await UserDao.findUser(whereObj, session);
+
+      if (!user) {
+        throw new Error("User not registered");
+      }
+
+      const tasks = await TaskDao.findTasks(whereObj, session);
+
+      await session.commitTransaction();
+      session.endSession();
+      return tasks;
     } catch (error) {
       logger.error(error);
       await session.abortTransaction();
