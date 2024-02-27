@@ -5,8 +5,10 @@ module.exports = {
   },
   ERRROR_STATUS_CODES: {
     STATUS_CODE_400: 400,
+    STATUS_CODE_401: 401,
   },
   STATUS_MESSAGES: {
     STATUS_MESSAGE_SUCCESS: "Success",
+    STATUS_MESSAGE_UNAUTHORIZED: "Unauthorized",
   },
 };
