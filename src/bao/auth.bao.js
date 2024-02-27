@@ -55,7 +55,7 @@ class AuthBao extends Base {
 
       await session.commitTransaction();
       session.endSession();
-      return { userId: userId };
+      return { userId: userId.toString() };
     } catch (error) {
       logger.error(error);
       await session.abortTransaction();

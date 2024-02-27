@@ -9,6 +9,8 @@ module.exports = {
   },
   STATUS_MESSAGES: {
     STATUS_MESSAGE_SUCCESS: "Success",
+    STATUS_MESSAGE_UPDATED: "Updated",
+    STATUS_MESSAGE_DELETED: "Deleted",
     STATUS_MESSAGE_UNAUTHORIZED: "Unauthorized",
   },
 };
