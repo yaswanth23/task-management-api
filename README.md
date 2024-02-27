@@ -45,7 +45,7 @@ curl http://localhost:9100/api/ping
 ```
 
 ### Signup endpoint cURL:
-To sign up for an account, you can use the following cURL command. Make sure to replace <USERNAME>, <EMAIL>, and <PASSWORD> with your desired username, email address, and password respectively.
+To sign up for an account, you can use the following cURL command. Make sure to replace `<USERNAME>`, `<EMAIL>`, and `<PASSWORD>` with your desired username, email address, and password respectively.
 ```bash
 curl --location 'http://localhost:9100/api/v1/auth/signup' \
 --header 'Content-Type: application/json' \
