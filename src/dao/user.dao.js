@@ -27,3 +27,11 @@ module.exports.insertUserAuthDetails = async (insertObj, session) => {
     throw error;
   }
 };
+
+module.exports.findUserAuthDetails = async (whereObj, session) => {
+  try {
+    return await UserAuthDetailsSchema.findOne(whereObj).session(session);
+  } catch (error) {
+    throw error;
+  }
+};
