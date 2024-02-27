@@ -17,6 +17,30 @@ wss.on("connection", function connection(ws) {
   ws.send("hello from server");
 });
 
+wss.on("taskAdded", function (taskId) {
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(`Task added: ${taskId}`);
+    }
+  });
+});
+
+wss.on("taskUpdated", function (taskId) {
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(`Task updated: ${taskId}`);
+    }
+  });
+});
+
+wss.on("taskDeleted", function (taskId) {
+  wss.clients.forEach(function each(client) {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(`Task deleted: ${taskId}`);
+    }
+  });
+});
+
 (async () => {
   await connectDB();
   server.listen(process.env.APP_PORT, () => {
