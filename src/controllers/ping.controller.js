@@ -1,3 +1,5 @@
+const { STATUS_CODES } = require("../common/constants");
+
 module.exports.getPing = async (httpRequest, httpResponse, next) => {
   try {
     const date = new Date();
@@ -7,7 +9,7 @@ module.exports.getPing = async (httpRequest, httpResponse, next) => {
       version: "1.0",
     };
 
-    return httpResponse.status(200).json(response);
+    return httpResponse.status(STATUS_CODES.STATUS_CODE_200).json(response);
   } catch (e) {
     return next(e);
   }
