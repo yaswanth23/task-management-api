@@ -70,7 +70,7 @@ curl --location 'http://localhost:9100/api/v1/auth/login' \
 Upon successful login, you will receive an access token in the response. This access token must be included in the Authorization header of subsequent API requests.
 
 ### Add task endpoint cURL:
-Replace <AUTHORIZATION> with the access token obtained after successful login. <TITLE> and <DESCRIPTION> should be replaced with the title and description of the task you want to add, respectively.
+Replace `<AUTHORIZATION>` with the access token obtained after successful login. <TITLE> and <DESCRIPTION> should be replaced with the title and description of the task you want to add, respectively.
 ```bash
 curl --location 'http://localhost:9100/api/v1/task' \
 --header 'Authorization: <AUTHORIZATION>' \
@@ -82,7 +82,7 @@ curl --location 'http://localhost:9100/api/v1/task' \
 ```
 
 ### Update task status endpoint cURL:
-Replace <AUTHORIZATION> with the access token obtained after successful login. <TASK_ID> should be replaced with the ID of the task you want to update, and <STATUS> should be replaced with the new status (e.g., "completed" or "active").
+Replace `<AUTHORIZATION>` with the access token obtained after successful login. <TASK_ID> should be replaced with the ID of the task you want to update, and <STATUS> should be replaced with the new status (e.g., "completed" or "active").
 ```bash
 curl --location --request PATCH 'http://localhost:9100/api/v1/task' \
 --header 'Authorization: <AUTHORIZATION>' \
@@ -94,14 +94,14 @@ curl --location --request PATCH 'http://localhost:9100/api/v1/task' \
 ```
 
 ### List of tasks endpoint cURL:
-Replace <AUTHORIZATION> with the access token obtained after successful login.
+Replace `<AUTHORIZATION>` with the access token obtained after successful login.
 ```bash
 curl --location 'http://localhost:9100/api/v1/task' \
 --header 'Authorization: <AUTHORIZATION>'
 ```
 
 ### Delete task endpoint cURL:
-Replace <AUTHORIZATION> with the access token obtained after successful login, and <TASK_ID> with the ID of the task you want to delete.
+Replace `<AUTHORIZATION>` with the access token obtained after successful login, and <TASK_ID> with the ID of the task you want to delete.
 ```bash
 curl --location --request DELETE 'http://localhost:9100/api/v1/task/<TASK_ID>' \
 --header 'Authorization: <AUTHORIZATION>'
