@@ -67,7 +67,7 @@ class AuthBao extends Base {
   async login(data) {
     const session = await mongoose.startSession();
     try {
-      logger.info("auth bao: signup");
+      logger.info("auth bao: login");
       session.startTransaction();
 
       let whereObj = {
