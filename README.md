@@ -112,3 +112,6 @@ The WebSocket connection URL ws://localhost:9100 is used to establish a WebSocke
 ```bash
 ws://localhost:9100
 ```
+
+### Conclusion
+In this document, we have covered the endpoints and cURL commands for interacting with the Task Management API. By following the provided examples and guidelines, you can easily integrate and utilize the APIs.
