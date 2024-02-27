@@ -7,6 +7,7 @@ const {
   ERRROR_STATUS_CODES,
   STATUS_MESSAGES,
 } = require("../common/constants");
+const wss = require("../../bin/www");
 
 module.exports.addTask = async (req, res) => {
   try {
@@ -21,6 +22,10 @@ module.exports.addTask = async (req, res) => {
 
     const taskBao = new TaskBao();
     const result = await taskBao.addTask(data, userId);
+
+    if (wss && wss.clients && wss.clients.size > 0) {
+      wss.emit("taskAdded", result.taskId);
+    }
 
     return res.status(STATUS_CODES.STATUS_CODE_201).json({
       statusCode: STATUS_CODES.STATUS_CODE_201,

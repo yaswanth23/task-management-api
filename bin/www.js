@@ -3,13 +3,28 @@ const colors = require("colors/safe");
 const http = require("http");
 const app = require("../src/app");
 const connectDB = require("../src/db/dbConnection");
+const WebSocketServer = require("ws");
+
+const server = http.createServer(app);
+const wss = new WebSocketServer.Server({ server });
+
+wss.on("connection", function connection(ws) {
+  console.log("WebSocket connection established");
+
+  ws.on("message", function message(data) {
+    console.log("received: %s", data);
+  });
+  ws.send("hello from server");
+});
 
 (async () => {
   await connectDB();
-  http.createServer(app).listen(process.env.APP_PORT, () => {
+  server.listen(process.env.APP_PORT, () => {
     const url = `http://localhost:${process.env.APP_PORT}`;
-    console.log(`webserver listening on ${url}`);
-    console.log(`use the following command to test the ping call`);
+    console.log(`Web server listening on ${url}`);
+    console.log(`Use the following command to test the ping call:`);
     console.debug(`${colors.yellow("curl " + url + "/api/ping")}`);
   });
 })();
+
+module.exports = { wss };
