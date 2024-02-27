@@ -2,6 +2,7 @@ module.exports = {
   STATUS_CODES: {
     STATUS_CODE_200: 200,
     STATUS_CODE_201: 201,
+    STATUS_CODE_204: 204,
   },
   ERRROR_STATUS_CODES: {
     STATUS_CODE_400: 400,

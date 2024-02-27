@@ -65,3 +65,27 @@ module.exports.updateTaskStatus = async (req, res) => {
     });
   }
 };
+
+module.exports.deleteTask = async (req, res) => {
+  try {
+    logger.info("task controller: deleteTask");
+
+    const taskId = req.params.taskId;
+    const userId = req.userId;
+
+    const taskBao = new TaskBao();
+    await taskBao.deleteTask(taskId, userId);
+
+    return res.status(STATUS_CODES.STATUS_CODE_204).json({
+      statusCode: STATUS_CODES.STATUS_CODE_204,
+      status: STATUS_MESSAGES.STATUS_MESSAGE_DELETED,
+    });
+  } catch (error) {
+    logger.error(error);
+    const errorMessage = error.message || error || "Internal Server Error";
+    return res.status(ERRROR_STATUS_CODES.STATUS_CODE_400).json({
+      statusCode: ERRROR_STATUS_CODES.STATUS_CODE_400,
+      errorMessage: errorMessage,
+    });
+  }
+};

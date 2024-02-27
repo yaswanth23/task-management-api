@@ -5,5 +5,6 @@ const { TaskController } = require("../controllers");
 
 router.post("/", [checkJwtAndDecodeToken, TaskController.addTask]);
 router.patch("/", [checkJwtAndDecodeToken, TaskController.updateTaskStatus]);
+router.delete("/:taskId", [checkJwtAndDecodeToken, TaskController.deleteTask]);
 
 module.exports = router;

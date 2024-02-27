@@ -74,7 +74,7 @@ class TaskBao extends Base {
       const task = await TaskDao.findTask(whereObj, session);
 
       if (!task) {
-        throw new Error("Task not found", data.taskId);
+        throw new Error("Task not found " + data.taskId);
       }
 
       let updateObj = {
@@ -86,6 +86,46 @@ class TaskBao extends Base {
       await session.commitTransaction();
       session.endSession();
       return { taskId: data.taskId, userId, status: data.status };
+    } catch (error) {
+      logger.error(error);
+      await session.abortTransaction();
+      session.endSession();
+      throw error;
+    }
+  }
+
+  async deleteTask(taskId, userId) {
+    const session = await mongoose.startSession();
+    try {
+      logger.info("task bao: deleteTask", taskId);
+      session.startTransaction();
+
+      let whereObj = {
+        userId: userId,
+      };
+
+      const user = await UserDao.findUser(whereObj, session);
+
+      if (!user) {
+        throw new Error("User not registered");
+      }
+
+      whereObj = {
+        userId: userId,
+        taskId: taskId,
+      };
+
+      const task = await TaskDao.findTask(whereObj, session);
+
+      if (!task) {
+        throw new Error("Task not found " + taskId);
+      }
+
+      await TaskDao.deleteTask(whereObj, session);
+
+      await session.commitTransaction();
+      session.endSession();
+      return true;
     } catch (error) {
       logger.error(error);
       await session.abortTransaction();

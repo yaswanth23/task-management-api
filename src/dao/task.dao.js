@@ -26,3 +26,13 @@ module.exports.updateTask = async (whereObj, updateObj, session) => {
     throw error;
   }
 };
+
+module.exports.deleteTask = async (whereObj, session) => {
+  try {
+    return await TasksSchema.deleteOne(whereObj, {
+      session: session,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
